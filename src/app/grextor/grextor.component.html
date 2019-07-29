@@ -1,0 +1,62 @@
+<div>
+  
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+       <mat-panel-title>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Search" aria-label="Search" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="selectedOption(option)">
+                {{option.property}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        <button style="height: 32px;top: 10px;left: 12px;" mat-raised-button color="primary"(click)="submitOption()" >Submit</button>
+        <div style="position: relative;
+        left: 355px;">
+          <p style="margin-top: 20px;">Click To Apply Filters</p>
+        </div>
+       </mat-panel-title>
+       
+    </mat-expansion-panel-header>
+    <div>
+    <mat-checkbox class="example-margin" [(ngModel)]="Discounted">Discounted</mat-checkbox>
+    <section class="example-section">
+      <label class="example-margin">Price:</label>
+      <mat-radio-group [(ngModel)]="labelPosition">
+        <mat-radio-button class="example-margin" value="!labelPosition">Low To High</mat-radio-button>
+        <mat-radio-button class="example-margin" value="labelPosition" >High To Low</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <mat-checkbox class="example-margin" [(ngModel)]="Available">Avalaible</mat-checkbox>
+    <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="option"></ng5-slider>
+    </div>
+
+ </mat-expansion-panel>
+</div>  
+
+<ul *ngFor="let homes of home">
+        
+            <mat-card class="example-card">
+                <img mat-card-image src={{homes.image}} >
+                <mat-card-header>
+                    <mat-card-title>{{homes.property|uppercase}}<span class="price">Rents From {{homes.price| currency: 'INR':true}}</span></mat-card-title>
+                    <mat-card-subtitle>{{homes.location+" | "+homes.available_rooms+" rooms available"}}</mat-card-subtitle>
+                </mat-card-header>
+                    
+                <mat-card-actions>
+                    <div>
+                      <button style="height: 32px;top: 0px;left: 12px;" mat-raised-button color="primary" (click)="openDialog()" >Intrested <mat-icon>favorite</mat-icon></button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        
+              
+    </ul>
+  
+  <!-- Copyright 2019 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
